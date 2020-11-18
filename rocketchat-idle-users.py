@@ -38,7 +38,8 @@ def get_idle_users():
                 'all': [],
                 'onetimelogin': []
             },
-            'no_username': []
+            'no_username': [],
+            'recent_single_login': []
         }
 
         for user in rocket.users_list(count=0).json()['users']:
@@ -65,6 +66,9 @@ def get_idle_users():
                     idle_users['90']['all'].append(user['username'])
                     if first_last_login_delta.days < 2:
                         idle_users['90']['onetimelogin'].append(user['username'])
+                else:
+                    if first_last_login_delta.days < 2:
+                        idle_users['recent_single_login'].append(user['username'])
             else:
                 idle_users['no_username'].append(user['name'])
 
@@ -92,6 +96,9 @@ def get_idle_users():
               '\n' +
               ' --> of these, the number who probably only logged in once ever: ' +
               str(len(idle_users['365']['onetimelogin'])) +
+              '\n\n' +
+              'Number of recent users who have probably only logged in once ever: ' +
+              str(len(idle_users['recent_single_login'])) +
               '\n'
               )
 
