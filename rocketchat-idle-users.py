@@ -43,6 +43,8 @@ def get_idle_users():
         }
 
         for user in rocket.users_list(count=0).json()['users']:
+
+            # for some reason, not all users have a listed username or lastLogin time, we can skip this
             if 'lastLogin' in user and 'username' in user:
 
                 last_login = datetime.strptime(user['lastLogin'], '%Y-%m-%dT%H:%M:%S.%fZ')
@@ -102,11 +104,8 @@ def get_idle_users():
               '\n'
               )
 
-
-
     except json.JSONDecodeError:
         pprint(json.JSONDecodeError)
-
 
 
 get_idle_users()
