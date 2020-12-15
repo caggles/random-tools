@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+  become: false
+  vars_files:
+    vars-local.yaml
+  tasks:
+
+    - set_fact:
+        my_list: ["here", "is", "a", "list"]
+
+    - debug:
+        var: my_list | type_debug
+
+
