@@ -13,11 +13,15 @@ import json
 
 def get_idle_users():
 
+    # don't forget to check the username and add the password to your environment:
+    # export ROCKETCHAT_ADMIN_PASSWORD=XXXXXXXXX
+
     dotenv.load_dotenv()
+    admin_name = 'adminx'
     admin_pass = os.getenv('ROCKETCHAT_ADMIN_PASSWORD')
 
     try:
-        rocket = RocketChat('admin', admin_pass, server_url='https://chat.pathfinder.gov.bc.ca')
+        rocket = RocketChat(admin_name, admin_pass, server_url='https://chat.developer.gov.bc.ca')
 
         current_time = datetime.now()
 

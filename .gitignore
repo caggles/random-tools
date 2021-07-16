@@ -1,2 +1,3 @@
 .env
 vars-local.yaml
+secrets/*
